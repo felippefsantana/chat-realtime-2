@@ -8,6 +8,7 @@ services:
     container_name: chat_api
     ports:
       - '3000:3000' # Mapeia a porta do contêiner para a máquina host
+    restart: unless-stopped
     volumes:
       - .:/app      # Monta o diretório local para desenvolvimento
       - /app/node_modules # Evita sobrescrever a pasta node_modules
@@ -18,9 +19,10 @@ services:
       - db  # Garante que o serviço 'db' esteja ativo antes de iniciar a aplicação
 
   db:
-    image: postgres:15
+    image: postgres:latest
     ports:
       - '5432:5432'
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}          # Nome do usuário do banco de dados
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}  # Senha do usuário

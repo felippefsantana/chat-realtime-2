@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat_api
+    ports:
+      - '3000:3000' # Mapeia a porta do contêiner para a máquina host
+    volumes:
+      - .:/app      # Monta o diretório local para desenvolvimento
+      - /app/node_modules # Evita sobrescrever a pasta node_modules
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: ${DATABASE_URL}
+    depends_on:
+      - db  # Garante que o serviço 'db' esteja ativo antes de iniciar a aplicação
+
+  db:
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}          # Nome do usuário do banco de dados
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}  # Senha do usuário
+      POSTGRES_DB: ${POSTGRES_DB:-chat_realtime}              # Nome do banco de dados padrão
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Volume para persistência de dados
+
+volumes:
+  pgdata:

@@ -19,5 +19,31 @@ model User {
   email    String @unique
   password String
 
+  chats ChatMembers[]
+
   @@map("users")
+}
+
+model Chat {
+  id        String   @id @default(uuid())
+  isGroup   Boolean  @default(false)
+  name      String?
+  slug      String?
+  createdAt DateTime @default(now())
+
+  members ChatMembers[]
+
+  @@map("chats")
+}
+
+model ChatMembers {
+  chatId   String
+  userId   String
+  joinedAt DateTime @default(now())
+
+  chat Chat @relation(fields: [chatId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@id([chatId, userId])
+  @@map("chat_members")
 }

@@ -3,6 +3,24 @@ content-type: application/json
 
 {
   "name": "Felippe Santana",
-  "email": "felippefsantan@fakemail.com",
+  "email": "felippefsantana@fakemail.com",
   "password": "pass@123"
 }
+
+###
+
+GET http://localhost:3000/api/users/044e3d9c-f154-449a-9244-3cde10ef45df HTTP/1.1
+
+###
+
+PATCH http://localhost:3000/api/users/update/044e3d9c-f154-449a-9244-3cde10ef45df HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Felippe Santana",
+  "email": "felippefsantana02@gmail.com"
+}
+
+###
+
+DELETE http://localhost:3000/api/users/delete/044e3d9c-f154-449a-9244-3cde10ef45df HTTP/1.1

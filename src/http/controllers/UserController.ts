@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/utils/hash-password";
 import { Request, Response } from "express";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 
 export async function createUser(req: Request, res: Response) {
   const createUserSchema = z.object({
@@ -48,12 +48,34 @@ export async function createUser(req: Request, res: Response) {
       user,
     });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return res.status(400).json({
+        message: "Dados inválidos.",
+        error,
+      });
+    }
+
     return res.status(500).json({
       message: "Erro interno do servidor.",
       error
     });
   }
 };
+
+export async function findAllUsers(req: Request, res: Response) {
+  try {
+    const users = await prisma.user.findMany();
+
+    return res.status(200).json({
+      users,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Erro interno do servidor.",
+      error
+    });
+  }
+}
 
 export async function findUser(req: Request, res: Response) {
   try {

@@ -2,10 +2,14 @@ POST http://localhost:3000/api/users/create HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Felippe Santana",
+  "name": "",
   "email": "felippefsantana@fakemail.com",
   "password": "pass@123"
 }
+
+###
+
+GET http://localhost:3000/api/users/ HTTP/1.1
 
 ###
 
@@ -24,3 +28,13 @@ content-type: application/json
 ###
 
 DELETE http://localhost:3000/api/users/delete/044e3d9c-f154-449a-9244-3cde10ef45df HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "felippefsantana02@gmail.com",
+  "password": "pass@123"
+}

@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { env } from "./config/env";
 
+import authRoutes from "./http/routes/auth-routes";
 import userRoutes from "./http/routes/user-routes";
 
 const app = express();
@@ -16,6 +17,7 @@ app.get("/", (req: Request, res: Response): Response => {
   return res.json({ message: "Hello World!" });
 });
 
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(env.APP_PORT, () => {

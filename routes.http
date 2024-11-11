@@ -2,8 +2,8 @@ POST http://localhost:3000/api/users/create HTTP/1.1
 content-type: application/json
 
 {
-  "name": "João Vitor",
-  "email": "joao.vitor@gmail.com",
+  "name": "Felippe Santana",
+  "email": "felippefsantana02@gmail.com",
   "password": "pass@123"
 }
 
@@ -43,22 +43,32 @@ content-type: application/json
 
 POST http://localhost:3000/api/chats/create HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxN2ZkNTMwLWRiZWItNGQwYi04Mjg2LWY0NWY5YWU2OTFjNSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMzQxNTI2LCJleHAiOjE3MzE0Mjc5MjZ9.-70xE6x11AUqCYiaCOWSNMlC-tR0PRJ5T-U-Xe51DEw
 
 {
   "name": "",
   "slug": "",
   "members": [
-    "c5cd784d-330d-4665-b84c-3f67c07af47c"
+    "7f81de9f-3d33-409e-a174-5d183e6d885f"
   ]
 }
 
 ### Chats - find chat
 
 GET http://localhost:3000/api/chats/07bfce56-17a1-429b-9059-49728a4e4401 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxN2ZkNTMwLWRiZWItNGQwYi04Mjg2LWY0NWY5YWU2OTFjNSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMzQxNTI2LCJleHAiOjE3MzE0Mjc5MjZ9.-70xE6x11AUqCYiaCOWSNMlC-tR0PRJ5T-U-Xe51DEw
 
 ### Chats - find user chats
 
 GET http://localhost:3000/api/chats HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxN2ZkNTMwLWRiZWItNGQwYi04Mjg2LWY0NWY5YWU2OTFjNSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMzQxNTI2LCJleHAiOjE3MzE0Mjc5MjZ9.-70xE6x11AUqCYiaCOWSNMlC-tR0PRJ5T-U-Xe51DEw
+
+### Messages - create message
+POST http://localhost:3000/api/messages/create HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxN2ZkNTMwLWRiZWItNGQwYi04Mjg2LWY0NWY5YWU2OTFjNSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMzQxNTI2LCJleHAiOjE3MzE0Mjc5MjZ9.-70xE6x11AUqCYiaCOWSNMlC-tR0PRJ5T-U-Xe51DEw
+
+{
+  "chatId": "df224e9f-0a13-4dde-94d7-ed56c49cdd51",
+  "content": "teste 123"
+}

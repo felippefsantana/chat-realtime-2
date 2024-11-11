@@ -11,7 +11,7 @@ dotenv.config({
 const envSchema = z.object({
   NODE_ENV: z.string(),
   APP_HOST: z.string(),
-  APP_PORT: z.string(),
+  APP_PORT: z.coerce.number(),
   APP_URL: z.string().url(),
   DATABASE_URL: z.string().url(),
   JWT_SECRET: z.string(),

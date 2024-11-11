@@ -20,7 +20,7 @@ model User {
   email    String @unique
   password String
 
-  chats    ChatMembers[]
+  chats    ChatMember[]
   messages Message[]
 
   @@map("users")
@@ -33,12 +33,12 @@ model Chat {
   slug      String?
   createdAt DateTime @default(now())
 
-  members ChatMembers[]
+  members ChatMember[]
 
   @@map("chats")
 }
 
-model ChatMembers {
+model ChatMember {
   chatId   String
   userId   String
   joinedAt DateTime @default(now())

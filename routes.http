@@ -59,5 +59,6 @@ GET http://localhost:3000/api/chats/07bfce56-17a1-429b-9059-49728a4e4401 HTTP/1.
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk
 
 ### Chats - find user chats
+
 GET http://localhost:3000/api/chats HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk

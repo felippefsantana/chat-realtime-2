@@ -13,7 +13,7 @@ export async function createChat(req: Request, res: Response) {
     const { name, slug, members } = createChatSchema.parse(req.body);
     const { id } = req.user;
 
-    const newChat = await prisma.chat.create({
+    const chat = await prisma.chat.create({
       data: {
         name,
         slug,
@@ -29,9 +29,15 @@ export async function createChat(req: Request, res: Response) {
       }
     });
 
+    if (!chat) {
+      return res.status(500).json({
+        mesage: "Não foi possível criar o chat.",
+      });
+    }
+
     return res.status(201).json({
       mesage: "Chat criado com sucesso.",
-      chat: newChat,
+      chat,
     });
   } catch (error) {
     if (error instanceof ZodError) {

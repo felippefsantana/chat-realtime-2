@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["omitApi"]
 }
 
@@ -20,7 +20,8 @@ model User {
   email    String @unique
   password String
 
-  chats ChatMembers[]
+  chats    ChatMembers[]
+  messages Message[]
 
   @@map("users")
 }
@@ -47,4 +48,14 @@ model ChatMembers {
 
   @@id([chatId, userId])
   @@map("chat_members")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  chatId    String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
 }

@@ -1,12 +1,24 @@
-import { Message } from "@prisma/client"
-import { Job } from "bullmq"
+import { prisma } from "@/lib/prisma";
+import { Message } from "@prisma/client";
+import { Job } from "bullmq";
+import { getSocketIO } from "@/lib/socket";
 
 export default {
   key: "SaveMessage",
   handle: async ({ data }: Job<Message>) => {
-    // lógica para salvar a message no banco
+    const io = getSocketIO();
 
-    // emitir evento para o client
+    const message = await prisma.message.create({
+      data: {
+        userId: data.userId,
+        chatId: data.chatId,
+        content: data.content,
+      }
+    });
+
+    io.emit("receiveMessage", message);
+    // io.to(chatId).emit("receiveMessage", message);
+
     return data;
   }
 }

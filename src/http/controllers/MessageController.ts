@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { io } from "@/server";
 import { Request, Response } from "express";
 import { z, ZodError } from "zod";
+import queue from "@/lib/queue";
 
 export async function createMessage(req: Request, res: Response) {
   const createMessageSchema = z.object({
@@ -25,26 +25,14 @@ export async function createMessage(req: Request, res: Response) {
       });
     }
 
-    const message = await prisma.message.create({
-      data: {
-        userId: id,
-        chatId,
-        content,
-      }
+    queue.add("SaveMessage", "save new message", {
+      userId: id,
+      chatId,
+      content,
     });
 
-    if (!message) {
-      return res.status(500).json({
-        mesage: "Não foi possível criar a mensagem.",
-      });
-    }
-
-    io.emit("receiveMessage", message);
-    // io.to(chatId).emit("receiveMessage", message);
-
-    return res.status(201).json({
-      message: "Mensagem criada com sucesso.",
-      data: message
+    return res.status(202).json({
+      message: "Mensagem enfileirada com sucesso."
     });
   } catch (error) {
     if (error instanceof ZodError) {

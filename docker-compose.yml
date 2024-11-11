@@ -16,7 +16,8 @@ services:
       NODE_ENV: development
       DATABASE_URL: ${DATABASE_URL}
     depends_on:
-      - db  # Garante que o serviço 'db' esteja ativo antes de iniciar a aplicação
+      - db
+      - redis
 
   db:
     image: postgres:latest
@@ -26,9 +27,20 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}          # Nome do usuário do banco de dados
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}  # Senha do usuário
-      POSTGRES_DB: ${POSTGRES_DB:-chat_realtime}              # Nome do banco de dados padrão
+      POSTGRES_DB: ${POSTGRES_DB:-chat_realtime}         # Nome do banco de dados padrão
     volumes:
       - pgdata:/var/lib/postgresql/data # Volume para persistência de dados
 
+  redis:
+    image: bitnami/redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    restart: unless-stopped
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+
 volumes:
   pgdata:
+  redis_data:

@@ -5,6 +5,7 @@ import { env } from "./config/env";
 
 import authRoutes from "./http/routes/auth-routes";
 import userRoutes from "./http/routes/user-routes";
+import chatRoutes from "./http/routes/chat-routes";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/", (req: Request, res: Response): Response => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/chats", chatRoutes);
 
 app.listen(env.APP_PORT, () => {
   console.log(`Server is running on ${env.APP_URL}`);

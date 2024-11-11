@@ -2,22 +2,22 @@ POST http://localhost:3000/api/users/create HTTP/1.1
 content-type: application/json
 
 {
-  "name": "",
-  "email": "felippefsantana@fakemail.com",
+  "name": "João Vitor",
+  "email": "joao.vitor@gmail.com",
   "password": "pass@123"
 }
 
-###
+### Users - find all users
 
 GET http://localhost:3000/api/users/ HTTP/1.1
 
-###
+###  Users - find user
 
-GET http://localhost:3000/api/users/044e3d9c-f154-449a-9244-3cde10ef45df HTTP/1.1
+GET http://localhost:3000/api/users/732c42d5-2967-498d-8107-57c31833fbaa HTTP/1.1
 
-###
+### Users - update user
 
-PATCH http://localhost:3000/api/users/update/044e3d9c-f154-449a-9244-3cde10ef45df HTTP/1.1
+PATCH http://localhost:3000/api/users/update/732c42d5-2967-498d-8107-57c31833fbaa HTTP/1.1
 content-type: application/json
 
 {
@@ -25,11 +25,11 @@ content-type: application/json
   "email": "felippefsantana02@gmail.com"
 }
 
-###
+### Users - delete user
 
 DELETE http://localhost:3000/api/users/delete/044e3d9c-f154-449a-9244-3cde10ef45df HTTP/1.1
 
-###
+### Authentication - login
 
 POST http://localhost:3000/api/auth/login HTTP/1.1
 content-type: application/json
@@ -38,3 +38,26 @@ content-type: application/json
   "email": "felippefsantana02@gmail.com",
   "password": "pass@123"
 }
+
+### Chats - create new chat
+
+POST http://localhost:3000/api/chats/create HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk
+
+{
+  "name": "",
+  "slug": "",
+  "members": [
+    "c5cd784d-330d-4665-b84c-3f67c07af47c"
+  ]
+}
+
+### Chats - find chat
+
+GET http://localhost:3000/api/chats/07bfce56-17a1-429b-9059-49728a4e4401 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk
+
+### Chats - find user chats
+GET http://localhost:3000/api/chats HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMmM0MmQ1LTI5NjctNDk4ZC04MTA3LTU3YzMxODMzZmJhYSIsImVtYWlsIjoiZmVsaXBwZWZzYW50YW5hMDJAZ21haWwuY29tIiwiaWF0IjoxNzMxMjgzNzUxLCJleHAiOjE3MzEzNzAxNTF9.yr2szkr-VnczH5JkSRUwbEo0UAGj21GxEdoc3sYK5sk

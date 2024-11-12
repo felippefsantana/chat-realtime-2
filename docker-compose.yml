@@ -7,14 +7,36 @@ services:
       dockerfile: Dockerfile
     container_name: chat_api
     ports:
-      - '3000:3000' # Mapeia a porta do contêiner para a máquina host
+      - '${APP_PORT:-3000}:3000'
     restart: unless-stopped
     volumes:
-      - .:/app      # Monta o diretório local para desenvolvimento
-      - /app/node_modules # Evita sobrescrever a pasta node_modules
+      - .:/app
+      - /app/node_modules
     environment:
       NODE_ENV: development
       DATABASE_URL: ${DATABASE_URL}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+    command: sh -c "npx prisma migrate dev && npm run dev:server"
+    depends_on:
+      - db
+      - redis
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: queue_worker
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+    command: npm run dev:queue
     depends_on:
       - db
       - redis
@@ -22,21 +44,21 @@ services:
   db:
     image: postgres:latest
     ports:
-      - '5432:5432'
+      - '${POSTGRES_PORT:-5432}:5432'
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}          # Nome do usuário do banco de dados
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}  # Senha do usuário
-      POSTGRES_DB: ${POSTGRES_DB:-chat_realtime}         # Nome do banco de dados padrão
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-chat_realtime}
     volumes:
-      - pgdata:/var/lib/postgresql/data # Volume para persistência de dados
+      - pgdata:/var/lib/postgresql/data
 
   redis:
     image: bitnami/redis:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
-      - '6379:6379'
+      - '${REDIS_PORT:-6379}:6379'
     restart: unless-stopped
     volumes:
       - 'redis_data:/bitnami/redis/data'

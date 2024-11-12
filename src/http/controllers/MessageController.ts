@@ -48,3 +48,25 @@ export async function createMessage(req: Request, res: Response) {
     });
   }
 }
+
+export async function findMessages(req: Request, res: Response) {
+  try {
+    const { chatId } = req.params;
+    const messages = await prisma.message.findMany({
+      where: {
+        chatId
+      },
+      take: 50,
+      orderBy: {
+        createdAt: "desc"
+      }
+    });
+
+    return res.status(200).json({ messages });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Erro interno do servidor.",
+      error
+    });
+  }
+}

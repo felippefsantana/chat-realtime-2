@@ -4,6 +4,7 @@ import { auth } from "../middlewares/auth";
 
 const router = Router();
 
+router.get("/:chatId", auth, MessageController.findMessages);
 router.post("/create", auth, MessageController.createMessage);
 
 export default router;

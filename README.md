@@ -45,4 +45,11 @@ docker compose up -d
 
 Após a inicialização dos contâineres a aplicação estará disponível em `http://localhost:3000` (ou na porta que você configurou em `.env`).
 
-Você pode ver as rotas em `http://localhost:3000/api-docs`
+Você pode ver as rotas em `http://localhost:3000/api-docs`.
+
+### 5. Postman
+
+Dentro da pasta raíz do projeto existe um arquivo `collection.json`, no qual você pode importar para o `Postman` para testar as rotas em um cliente http.
+
+Para testar o `WebSocket`, crie uma nova collection dentro do postman e crie uma nova requisição de tipo `Socket.io`. Insira o endereço `ws://localhost:3000` para se conectar ao WebSocket.
+Emita o evento `joinRoom` informando o `chatId` para receber novas mensagens da conversa.

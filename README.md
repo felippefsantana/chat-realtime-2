@@ -44,3 +44,5 @@ docker compose up -d
 ### 4. Acessando a Aplicação
 
 Após a inicialização dos contâineres a aplicação estará disponível em `http://localhost:3000` (ou na porta que você configurou em `.env`).
+
+Você pode ver as rotas em `http://localhost:3000/api-docs`

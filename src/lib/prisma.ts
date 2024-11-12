@@ -6,5 +6,5 @@ export const prisma = new PrismaClient({
       password: true
     }
   },
-  log: ["query"],
+  // log: ["query"],
 });

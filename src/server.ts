@@ -22,7 +22,6 @@ redis.on("message", (channel, message) => {
     const { chatId } = parsedMessage;
 
     const io = getSocketIO();
-    // io.emit("receiveMessage", parsedMessage);
     io.to(chatId).emit("receiveMessage", parsedMessage);
   }
 });
